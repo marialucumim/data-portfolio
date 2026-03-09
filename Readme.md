@@ -1,6 +1,6 @@
-# Maria Lucumi |  Portfolio
+# Maria Lucumi
 
-# **Data Analyst | Business Intelligence**
+# **Data Analyst | Power BI | sql | Python
 
 > 
 > 
