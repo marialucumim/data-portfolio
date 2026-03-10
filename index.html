@@ -3,296 +3,711 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maria  Lucumi | Portfolio</title>
+  <title>Maria Lucumi | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5068;
+      --ink-faint: #8b92a9;
+      --accent: #2a5fd4;
+      --accent-soft: #eef3fc;
+      --surface: #f7f8fb;
+      --white: #ffffff;
+      --border: #e4e7f0;
+      --tag-bg: #eef3fc;
+      --tag-color: #2a5fd4;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #ffffff;
-      color: #666666;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* ── LAYOUT ── */
     .page {
       display: grid;
-      grid-template-columns: 380px 1fr;
+      grid-template-columns: 320px 1fr;
       min-height: 100vh;
     }
 
+    /* ── SIDEBAR ── */
     .sidebar {
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 60px 40px;
-      text-align: center;
-      border-right: 1px solid #eeeeee;
-      background: #ffffff;
+      overflow-y: auto;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 52px 36px 52px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 0;
     }
 
-    .sidebar h1 {
-      margin: 0 0 24px;
-      font-size: 46px;
-      line-height: 1.1;
-      color: #4a90e2;
-      font-weight: 700;
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
     }
 
     .profile-image {
-      width: 200px;
-      height: 200px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center 40%
-      box-shadow: 0 6px 20px
-    rgba(0,0,0,0.15);    
-      display: block;
-      margin: 0 auto 20px;
+      object-position: center 15%;
+      margin-bottom: 20px;
+      border: 3px solid var(--accent-soft);
+      box-shadow: 0 4px 20px rgba(42,95,212,0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image:hover { transform: scale(1.04); }
+
+    .sidebar h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
     }
 
     .links {
-      margin-bottom: 28px;
-      font-size: 18px;
-      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
     }
 
     .links a {
-      color: #4a90e2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-light);
       text-decoration: none;
+      font-size: 14px;
       font-weight: 500;
-      margin: 0 4px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
     }
 
     .links a:hover {
-      text-decoration: underline;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(42,95,212,0.25);
     }
 
-    .intro {
-      max-width: 290px;
-      margin: 0 auto;
-      text-align: left;
-      font-size: 20px;
-      line-height: 1.8;
-      color: #777777;
+    .links a svg { flex-shrink: 0; }
+
+    /* ── SIDEBAR NAV ── */
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
+    .sidebar-nav a {
+      color: var(--ink-faint);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* ── MAIN ── */
     .main-content {
-      padding: 70px 70px 60px;
-      max-width: 980px;
+      padding: 64px 72px 80px;
+      max-width: 860px;
     }
 
+    /* ── SECTIONS ── */
     .section {
-      margin-bottom: 64px;
+      margin-bottom: 72px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.55s ease forwards;
     }
 
-    .section h2 {
-      margin: 0 0 22px;
-      font-size: 30px;
-      color: #4a90e2;
+    .section:nth-child(1) { animation-delay: 0.05s; }
+    .section:nth-child(2) { animation-delay: 0.15s; }
+    .section:nth-child(3) { animation-delay: 0.25s; }
+    .section:nth-child(4) { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-label h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── KURZPROFIL ── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .profile-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-light);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .profile-card:hover {
+      border-color: rgba(42,95,212,0.3);
+      box-shadow: 0 4px 16px rgba(42,95,212,0.07);
+    }
+
+    .profile-card strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ANALYTISCHER ANSATZ ── */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .approach-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .approach-card:hover {
+      border-color: rgba(42,95,212,0.3);
+      box-shadow: 0 4px 16px rgba(42,95,212,0.07);
+    }
+
+    .approach-card .step-num {
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
 
-    .section p,
-    .section li {
-      font-size: 19px;
-      line-height: 1.8;
-      color: #666666;
+    .approach-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
     }
 
+    .approach-card p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-light);
+    }
+
+    /* ── PROJEKTE ── */
     .project {
-      margin-bottom: 42px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid #eeeeee;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      transition: box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .project:hover {
+      box-shadow: 0 8px 32px rgba(42,95,212,0.12);
+      border-color: rgba(42,95,212,0.3);
+    }
+
+    .project-header {
+      padding: 28px 32px 20px;
     }
 
     .project h3 {
-      margin: 0 0 10px;
-      font-size: 24px;
-      color: #444444;
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
     }
 
-    .project img {
+    .project > p,
+    .project-header p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-light);
+    }
+
+    .project-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    .project-images img {
       width: 100%;
-      max-width: 720px;
-      border-radius: 12px;
-      margin: 18px 0 18px;
+      aspect-ratio: 16/10;
+      object-fit: cover;
       display: block;
+      transition: opacity 0.2s;
+    }
+
+    .project-images img:hover { opacity: 0.9; }
+
+    .project-footer {
+      padding: 20px 32px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-insight {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-light);
+      flex: 1;
+    }
+
+    .project-insight strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 8px;
     }
 
     .tag {
-      background: #f3f7fc;
-      color: #4a90e2;
-      padding: 8px 14px;
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      padding: 5px 13px;
       border-radius: 999px;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
-    ul {
-      padding-left: 22px;
-      margin: 0;
-    }
-
-    .contact a {
-      color: #4a90e2;
+    .project-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 999px;
       text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
     }
 
-    .contact a:hover {
-      text-decoration: underline;
+    .project-cta:hover {
+      background: #1e4db5;
+      transform: translateY(-1px);
     }
 
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(42,95,212,0.3);
+      box-shadow: 0 4px 16px rgba(42,95,212,0.07);
+    }
+
+    .skill-card .skill-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .skill-card .skill-level {
+      font-size: 11px;
+      color: var(--ink-faint);
+      font-weight: 500;
+    }
+
+    .skill-bar-bg {
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      width: 0;
+      animation: fillBar 1s ease 0.6s forwards;
+    }
+
+    @keyframes fillBar { to { width: var(--w); } }
+
+    /* ── KONTAKT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(42,95,212,0.3);
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: 0 4px 16px rgba(42,95,212,0.08);
+    }
+
+    .contact-card svg { color: var(--accent); }
+    .contact-card .c-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+    .contact-card .c-value { font-size: 13px; font-weight: 500; word-break: break-all; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 980px) {
-      .page {
-        grid-template-columns: 1fr;
-      }
-
+      .page { grid-template-columns: 1fr; }
       .sidebar {
         position: relative;
         height: auto;
         border-right: none;
-        border-bottom: 1px solid #eeeeee;
-        padding: 50px 24px;
+        border-bottom: 1px solid var(--border);
+        padding: 44px 28px 36px;
       }
+      .main-content { padding: 44px 28px 60px; }
+      .profile-grid,
+      .approach-grid,
+      .skills-grid,
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .project-images { grid-template-columns: 1fr; }
+    }
 
-      .main-content {
-        padding: 40px 24px 50px;
-      }
-
-      .sidebar h1 {
-        font-size: 38px;
-      }
-
-      .profile-image {
-        width: 220px;
-        height: 220px;
-      }
-
-      .intro {
-        text-align: center;
-        max-width: 520px;
-      }
+    @media (max-width: 600px) {
+      .profile-grid,
+      .approach-grid,
+      .skills-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .project-footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <aside class="sidebar">
-      <h1>Maria Lucumi</h1>
+<div class="page">
 
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
       <img src="Maria-perfil-Github.png" alt="Maria Eugenia Lucumi" class="profile-image" />
+      <h1>Maria Lucumi</h1>
+      <span class="role-badge">Data Analyst · BI</span>
 
       <div class="links">
-        <a href="Maria_Eugenia_Lucumi_Lebenslauf.pdf" target="_blank">Resume</a> |
-        <a href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank">LinkedIn</a> |
-        <a href="https://github.com/marialucumim" target="_blank">GitHub</a>
+        <a href="Maria_Eugenia_Lucumi_Lebenslauf.pdf" target="_blank">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Lebenslauf
+        </a>
+        <a href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/marialucumim" target="_blank">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
       </div>
+    </div>
 
-      <div class="intro">
-        Ich bin angehende Data Analystin mit Fokus auf Datenanalyse,
-        Reporting und aussagekräftige Visualisierungen für fundierte
-        Geschäftsentscheidungen.
+    <nav class="sidebar-nav">
+      <a href="#profil">Kurzprofil</a>
+      <a href="#ansatz">Analytischer Ansatz</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#skills">Skills & Tools</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main-content">
+
+    <!-- INTRO -->
+    <section class="section" style="margin-bottom:52px;">
+      <p style="font-size:15px;line-height:1.75;color:var(--ink-light);max-width:560px;">
+        Ich bin angehende Data Analystin mit Fokus auf Datenanalyse, Reporting und
+        aussagekräftige Visualisierungen — mit dem Ziel, Unternehmen bei fundierten
+        Geschäftsentscheidungen zu unterstützen.
+      </p>
+    </section>
+
+    <!-- KURZPROFIL -->
+    <section class="section" id="profil">
+      <div class="section-label"><h2>Kurzprofil</h2></div>
+      <div class="profile-grid">
+        <div class="profile-card">
+          <strong>Erfahrung</strong>
+          Über 8 Jahre in datenbasierten Geschäftsprozessen in internationalen Unternehmensumgebungen.
+        </div>
+        <div class="profile-card">
+          <strong>Schwerpunkte</strong>
+          Datenaufbereitung, Datenvalidierung und Analyse von Unternehmensdaten.
+        </div>
+        <div class="profile-card">
+          <strong>Unternehmen</strong>
+          Zusammenarbeit mit Henkel, Johnson & Johnson und L'Oréal in datenbasierten Implementierungsprojekten.
+        </div>
+        <div class="profile-card">
+          <strong>Weiterbildung</strong>
+          Abgeschlossene Weiterbildung in Data Analytics mit Schwerpunkt Business Intelligence.
+        </div>
       </div>
-    </aside>
+    </section>
 
-    <main class="main-content">
-      <section class="section">
-        <h2>Über mich</h2>
-        <p>
-          Ich entwickle datenbasierte Projekte mit Power BI, SQL, Excel und Python.
-          Mein Fokus liegt darauf, Daten verständlich aufzubereiten, Muster zu erkennen
-          und daraus klare Handlungsempfehlungen abzuleiten.
-        </p>
-      </section>
+    <!-- ANALYTISCHER ANSATZ -->
+    <section class="section" id="ansatz">
+      <div class="section-label"><h2>Analytischer Ansatz</h2></div>
+      <div class="approach-grid">
+        <div class="approach-card">
+          <div class="step-num">Schritt 01</div>
+          <h3>Datenverständnis</h3>
+          <p>Analyse der Datenstruktur sowie der zugrundeliegenden Fragestellung, um Kontext, Relevanz und mögliche Einschränkungen zu verstehen.</p>
+        </div>
+        <div class="approach-card">
+          <div class="step-num">Schritt 02</div>
+          <h3>Datenaufbereitung</h3>
+          <p>Bereinigung, Strukturierung und Validierung der Daten, um eine konsistente und zuverlässige Grundlage für die weitere Analyse zu schaffen.</p>
+        </div>
+        <div class="approach-card">
+          <div class="step-num">Schritt 03</div>
+          <h3>Explorative Analyse</h3>
+          <p>Identifikation von Mustern, Trends und Auffälligkeiten durch explorative Analyse und erste Visualisierungen.</p>
+        </div>
+        <div class="approach-card">
+          <div class="step-num">Schritt 04</div>
+          <h3>Visualisierung & Interpretation</h3>
+          <p>Darstellung der Ergebnisse durch klare Visualisierungen zur Unterstützung datenbasierter Entscheidungen.</p>
+        </div>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2>Projekte</h2>
+    <!-- PROJEKTE -->
+    <section class="section" id="projekte">
+      <div class="section-label"><h2>Projekte</h2></div>
 
-        <div class="project">
-          <h3>Arbeitsmarktanalyse Data Analyst Deutschland</h3>
-          <p>
-            Analyse von Gehaltsentwicklung, Erfahrungsstufen und Unternehmensmerkmalen
-            im deutschen Arbeitsmarkt von 2020 bis 2025.
-          </p>
-
-          <img src="DA Executive Overview.png" alt="Dashboard Arbeitsmarktanalyse" />
-          <img src="Detailanalyse - Branche und Unternehmen.png" alt="Dashboard  Detailanalyse Branche und Unternehmen" />
-          <img src="Gehaltanalyse nach Rolle.png" alt="Dashboard Gehaltanalyse nach Rolle" />
-
-          <p>
-            <strong>Erkenntnisse:</strong><br>
-            Senior-Gehälter steigen deutlich stärker als Entry-Gehälter.
-            Berufserfahrung wirkt stärker auf das Gehalt als Branche oder Unternehmensgröße.
-          </p>
-
-          <div class="tag-list">
-            <span class="tag">Power BI</span>
-            <span class="tag">DAX</span>
-            <span class="tag">Power Query</span>
-            <span class="tag">Data Cleaning</span>
-          </div>
+      <a class="project" href="arbeitsmarkt.html">
+        <div class="project-header">
+          <h3>Arbeitsmarktanalyse — Data Analyst Deutschland</h3>
+          <p>Analyse von Gehaltsentwicklung, Erfahrungsstufen und Unternehmensmerkmalen im deutschen Arbeitsmarkt von 2020 bis 2025.</p>
         </div>
 
-        
-       <!-- <div class="project">   -------     Aqui va el segundo proyecto cuando este listo  .. .recuereda solo quitar el comentario
+        <div class="project-images">
+          <img src="DA_Executive_Overview.png" alt="Executive Overview Dashboard" />
+          <img src="Detailanalyse_-_Branche_und_Unternehmen.png" alt="Detailanalyse Branche und Unternehmen" />
+          <img src="Gehaltanalyse_nach_Rolle.png" alt="Gehaltsanalyse nach Rolle" />
+        </div>
+
+        <div class="project-footer">
+          <div class="project-insight">
+            <strong>Erkenntnisse</strong>
+            Senior-Gehälter steigen deutlich stärker als Entry-Level-Gehälter.
+            Berufserfahrung hat einen stärkeren Einfluss auf das Gehalt als Branche oder Unternehmensgröße.
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+            <div class="tag-list" style="justify-content:flex-end;">
+              <span class="tag">Power BI</span>
+              <span class="tag">DAX</span>
+              <span class="tag">Power Query</span>
+              <span class="tag">Data Cleaning</span>
+            </div>
+            <span class="project-cta">
+              Projektdetails ansehen
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Zweites Projekt (auskommentiert — einfach den Kommentar entfernen wenn bereit) -->
+      <!--
+      <div class="project">
+        <div class="project-header">
           <h3>Verkaufsanalyse</h3>
-          <p>
-            Analyse von Verkaufsdaten zur Identifikation von Umsatztreibern,
-            regionalen Unterschieden und Wachstumspotenzialen.
-          </p>
-
+          <p>Analyse von Verkaufsdaten zur Identifikation von Umsatztreibern, regionalen Unterschieden und Wachstumspotenzialen.</p>
+        </div>
+        <div class="project-images">
           <img src="projekt2.png" alt="Dashboard Verkaufsanalyse" />
-
-          <p>
-            <strong>Erkenntnisse:</strong><br>
-            Bestimmte Regionen zeigen höheres Wachstum trotz geringerem Gesamtvolumen,
-            was auf gezielte Marktchancen hinweist.
-          </p>
-
+        </div>
+        <div class="project-footer">
+          <div class="project-insight">
+            <strong>Erkenntnisse</strong>
+            Bestimmte Regionen zeigen höheres Wachstum trotz geringerem Gesamtvolumen, was auf gezielte Marktchancen hinweist.
+          </div>
           <div class="tag-list">
             <span class="tag">Excel</span>
             <span class="tag">SQL</span>
             <span class="tag">Dashboarding</span>
           </div>
-        </div>-->
-      </section>
+        </div>
+      </div>
+      -->
+    </section>
 
-      <section class="section">
-        <h2>Skills & Tools</h2>
-        <ul>
-          <li>Power BI</li>
-          <li>SQL</li>
-          <li>Excel</li>
-          <li>Python</li>
-          <li>Datenbereinigung und Datenvisualisierung</li>
-        </ul>
-      </section>
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section-label"><h2>Skills & Tools</h2></div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-name">Power BI</div>
+          <div class="skill-level">Fortgeschritten</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:88%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">DAX & Power Query</div>
+          <div class="skill-level">Fortgeschritten</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:82%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">SQL</div>
+          <div class="skill-level">Fortgeschritten</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:78%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Excel</div>
+          <div class="skill-level">Experte</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:93%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Python</div>
+          <div class="skill-level">Grundkenntnisse</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:48%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Datenvisualisierung</div>
+          <div class="skill-level">Fortgeschritten</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div>
+        </div>
+      </div>
+    </section>
 
-      <section class="section contact">
-        <h2>Kontakt</h2>
-        <p>
-          E-Mail: <a href="mailto:marialucumim84@gmail.com">marialucumim84@gmail.com</a><br>
-          LinkedIn: <a href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank">Profil ansehen</a><br>
-          GitHub: <a href="https://github.com/marialucumim" target="_blank">marialucumim</a>
-        </p>
-      </section>
-    </main>
-  </div>
-</body>
-</html>
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+      <div class="section-label"><h2>Kontakt</h2></div>
+      <div class="contact-grid">
+        <a href="/cdn-cgi/l/email-protection#761b17041f171a0315031b1f1b4e4236111b171f1a5815191b" class="contact-card">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="c-label">E-Mail</span>
+          <span class="c-value"><span class="__cf_email__" data-cfemail="93fef2e1faf2ffe6f0e6fefafeaba7d3f4fef2faffbdf0fcfe">[email&#160;protected]</span></span>
+        </a>
+        <a href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank" class="contact-card">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span class="c-label">LinkedIn</span>
+          <span class="c-value">Profil ansehen</span>
+        </a>
+        <a href="https://github.com/marialucumim" target="_blank" class="contact-card">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span class="c-lab

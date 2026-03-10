@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arbeitsmarktanalyse | Maria Lucumi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5068;
+      --ink-faint: #8b92a9;
+      --accent: #2a5fd4;
+      --accent-soft: #eef3fc;
+      --surface: #f7f8fb;
+      --white: #ffffff;
+      --border: #e4e7f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .topbar-title {
+      font-size: 13px;
+      color: var(--ink-faint);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-list-top {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 52px;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero-meta-item .meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .hero-meta-item .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-light);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 48px 100px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .main-col { min-width: 0; }
+
+    /* ── SECTION BLOCKS ── */
+    .block {
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .block:nth-child(1) { animation-delay: 0.15s; }
+    .block:nth-child(2) { animation-delay: 0.25s; }
+    .block:nth-child(3) { animation-delay: 0.35s; }
+    .block:nth-child(4) { animation-delay: 0.45s; }
+
+    .block-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .block-label h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .block-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+    }
+
+    .block p:last-child { margin-bottom: 0; }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-light);
+      margin-bottom: 0;
+    }
+
+    /* ── SCREENSHOTS ── */
+    .screenshot-block {
+      margin-bottom: 32px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+
+    .screenshot-block:hover {
+      box-shadow: 0 8px 32px rgba(42,95,212,0.09);
+    }
+
+    .screenshot-block img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-caption {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .screenshot-caption strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .screenshot-caption span {
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    /* ── ERKENNTNISSE ── */
+    .insight-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .insight-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 18px 22px;
+      transition: box-shadow 0.2s;
+    }
+
+    .insight-card:hover {
+      box-shadow: 0 4px 16px rgba(42,95,212,0.08);
+    }
+
+    .insight-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .insight-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .insight-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-light);
+      margin-bottom: 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar-col {
+      position: sticky;
+      top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.3s forwards;
+    }
+
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .sidebar-card h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+    }
+
+    .sidebar-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sidebar-tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-row .stat-label { color: var(--ink-faint); }
+    .stat-row .stat-value { color: var(--ink); font-weight: 600; }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .nav-links a::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .nav-links a:hover::before { background: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .content { grid-template-columns: 1fr; }
+      .sidebar-col { position: relative; top: auto; }
+      .hero { padding: 44px 28px 36px; }
+      .content { padding: 40px 28px 60px; }
+      .topbar { padding: 0 24px; }
+      .topbar-title { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; }
+      .hero-meta { gap: 20px; }
+      .tag-list-top { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Zurück zum Portfolio
+    </a>
+    <span class="topbar-title">Maria Lucumi · Projektdetail</span>
+    <div class="tag-list-top">
+      <span class="tag">Power BI</span>
+      <span class="tag">DAX</span>
+      <span class="tag">Power Query</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="background:var(--white); border-bottom:1px solid var(--border);">
+    <div class="hero">
+      <div class="hero-label">Projekt · Data Analytics</div>
+      <h1>Arbeitsmarktanalyse — Data Analyst Deutschland</h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="meta-label">Zeitraum</span>
+          <span class="meta-value">2020 – 2025</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Datensatz</span>
+          <span class="meta-value">Kaggle — Global AI & Data Science Job Market</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Power BI, Power Query, DAX, Excel</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Stellenangebote analysiert</span>
+          <span class="meta-value">2.047</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <main class="main-col">
+
+      <!-- ZIELSETZUNG -->
+      <div class="block" id="ziel">
+        <div class="block-label"><h2>Zielsetzung</h2></div>
+        <p>
+          Ziel dieser Analyse war es, den deutschen Arbeitsmarkt für Data Analysten und Data Scientists 
+          im Zeitraum von 2020 bis 2025 systematisch zu untersuchen. Im Mittelpunkt standen 
+          Gehaltsentwicklung, Erfahrungsstufen, Branchen- und Unternehmensstrukturen sowie 
+          regionale Verteilungen.
+        </p>
+        <p>
+          Die zentrale Fragestellung lautete: <strong>Welche Faktoren beeinflussen das Gehalt 
+          in Data-Berufen am stärksten — und wie hat sich der Markt in den letzten Jahren entwickelt?</strong>
+        </p>
+      </div>
+
+      <!-- DATENSATZ & METHODIK -->
+      <div class="block" id="methodik">
+        <div class="block-label"><h2>Datensatz & Methodik</h2></div>
+        <p>
+          Der Datensatz stammt von Kaggle (Global AI and Data Science Job Market 2020–2026) 
+          und enthält Informationen zu Jobtiteln, Jobtypen, Unternehmensarten sowie Mindest- und 
+          Höchstgehältern, aus denen das Durchschnittsgehalt berechnet wurde. Gefiltert wurde 
+          ausschließlich auf Deutschland und die Jahre 2020 bis 2025.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Explorative Analyse in Excel</h3>
+              <p>Download des Datensatzes und erste explorative Analyse zur Strukturerkennung. 
+              Identifikation einer ID als Verknüpfungsschlüssel zwischen den verschiedenen Dimensionen.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Datenbereinigung in Power Query</h3>
+              <p>Entfernung von Duplikaten, Harmonisierung der Gehaltswerte und Filterung 
+              aller unvollständigen Einträge für eine konsistente Datenbasis.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Modellierung: Sternschema</h3>
+              <p>Aufbau eines Sternschemas mit einer zentralen Faktentabelle und mehreren 
+              Dimensionstabellen für Rolle, Branche, Unternehmenstyp und Jahr.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>DAX-Measures & Visualisierung</h3>
+              <p>Erstellung von Measures für Durchschnittsgehalt, Entry-Anteil und 
+              Gehaltsdifferenzen. Aufbau von drei interaktiven Power BI Dashboards.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREENSHOTS / DASHBOARDS -->
+      <div class="block" id="dashboards">
+        <div class="block-label"><h2>Dashboards</h2></div>
+
+        <div class="screenshot-block">
+          <img src="DA_Executive_Overview.png" alt="Executive Overview Dashboard" />
+          <div class="screenshot-caption">
+            <strong>Dashboard 1 — Executive Overview</strong>
+            <span>Gesamtmarktüberblick: KPIs, Stellenangebote nach Erfahrungsniveau, Gehaltsentwicklung und Arbeitsmodelle (2020–2024)</span>
+          </div>
+        </div>
+
+        <div class="screenshot-block">
+          <img src="Detailanalyse_-_Branche_und_Unternehmen.png" alt="Detailanalyse Branche und Unternehmen" />
+          <div class="screenshot-caption">
+            <strong>Dashboard 2 — Branchen & Unternehmensstruktur</strong>
+            <span>Stellenangebote nach Branche, Unternehmenstyp und regionaler Verteilung in den 4 deutschen Tech-Hubs</span>
+          </div>
+        </div>
+
+        <div class="screenshot-block">
+          <img src="Gehaltanalyse_nach_Rolle.png" alt="Gehaltsanalyse nach Rolle" />
+          <div class="screenshot-caption">
+            <strong>Dashboard 3 — Gehaltsanalyse nach Rolle</strong>
+            <span>Durchschnittliches Gehalt, Entry- vs. Senior-Niveau und Gehaltsdifferenz nach Branche und Unternehmenstyp (2020–2025)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ERKENNTNISSE -->
+      <div class="block" id="erkenntnisse">
+        <div class="block-label"><h2>Zentrale Erkenntnisse</h2></div>
+
+        <div class="insight-cards">
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 01</div>
+            <h3>Der Markt ist stabil und strukturell etabliert</h3>
+            <p>Der Datenarbeitsmarkt in Deutschland zeigt ein stabiles Wachstum mit vielfältigen 
+            Einstiegsmöglichkeiten. Senior-Positionen dominieren, aber Entry-Level-Stellen bleiben 
+            über den gesamten Zeitraum konstant vertreten. Der deutliche Gehaltsanstieg 2021 
+            könnte mit der erhöhten Nachfrage nach datenbasierten Entscheidungen während der 
+            Corona-Zeit zusammenhängen.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 02</div>
+            <h3>Data-Kompetenzen sind branchenübergreifend gefragt</h3>
+            <p>Data-Positionen sind nicht nur im klassischen IT-Bereich gefragt. Finance, Healthcare, 
+            Education und Retail zeigen eine relevante und vergleichbare Nachfrage. Multinationale 
+            Unternehmen, Research Labs und Startups bieten ein ähnliches Volumen an Stellenangeboten — 
+            was vielfältige Karrierewege ermöglicht.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 03</div>
+            <h3>Erfahrung wirkt stärker als Branche oder Unternehmensgröße</h3>
+            <p>Die Gehaltsdifferenz zwischen Entry-Level (∅ €67.500) und Senior-Level (∅ €157.600) 
+            beträgt über €90.000. Diese Struktur bleibt stabil, unabhängig von Branche oder 
+            Unternehmenstyp — Berufserfahrung ist der mit Abstand wichtigste Einflussfaktor 
+            auf das Gehalt.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar-col">
+
+      <div class="sidebar-card">
+        <h4>Navigation</h4>
+        <nav class="nav-links">
+          <a href="#ziel">Zielsetzung</a>
+          <a href="#methodik">Datensatz & Methodik</a>
+          <a href="#dashboards">Dashboards</a>
+          <a href="#erkenntnisse">Erkenntnisse</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Tools & Technologien</h4>
+        <div class="sidebar-tag-list">
+          <span class="sidebar-tag">Power BI</span>
+          <span class="sidebar-tag">DAX</span>
+          <span class="sidebar-tag">Power Query</span>
+          <span class="sidebar-tag">Excel</span>
+          <span class="sidebar-tag">Sternschema</span>
+          <span class="sidebar-tag">Data Cleaning</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Kennzahlen</h4>
+        <div class="stat-row">
+          <span class="stat-label">Stellenangebote</span>
+          <span class="stat-value">2.047</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Zeitraum</span>
+          <span class="stat-value">2020–2025</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Ø Gehalt</span>
+          <span class="stat-value">€111,5 Tsd.</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Entry-Gehalt</span>
+          <span class="stat-value">€67,5 Tsd.</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Senior-Gehalt</span>
+          <span class="stat-value">€157,6 Tsd.</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Gehaltsdifferenz</span>
+          <span class="stat-value">€90,1 Tsd.</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Datenquelle</h4>
+        <p style="font-size:13px;line-height:1.6;color:var(--ink-light);">
+          Kaggle — Global AI and Data Science Job Market 2020–2026<br>
+          <span style="color:var(--ink-faint);font-size:12px;">Öffentlich verfügbarer Datensatz</span>
+        </p>
+      </div>
+
+    </aside>
+  </div>
+
+</body>
+</html>
