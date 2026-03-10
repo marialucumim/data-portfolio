@@ -63,11 +63,12 @@
     }
 
     .profile-image {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center 15%;
+      margin-top: 16px;
       margin-bottom: 20px;
       border: 3px solid var(--accent-soft);
       box-shadow: 0 4px 20px rgba(42,95,212,0.12);
@@ -78,7 +79,7 @@
 
     .sidebar h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: 26px;
+      font-size: 32px;
       color: var(--ink);
       font-weight: 400;
       line-height: 1.2;
@@ -90,11 +91,12 @@
       background: var(--accent-soft);
       color: var(--accent);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 5px 14px;
       border-radius: 999px;
+      margin-top: 12px;
       margin-bottom: 20px;
     }
 
@@ -103,6 +105,7 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
+      margin-top: 24px;
     }
 
     .links a {
@@ -504,8 +507,8 @@
   <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sidebar-top">
-      <img src="Maria-perfil-Github.png" alt="Maria Eugenia Lucumi" class="profile-image" />
       <h1>Maria Lucumi</h1>
+      <img src="Maria-perfil-Github.png" alt="Maria Eugenia Lucumi" class="profile-image" />
       <span class="role-badge">Data Analyst · BI</span>
 
       <div class="links">
@@ -538,12 +541,16 @@
 
     <!-- INTRO -->
     <section class="section" style="margin-bottom:52px;">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:36px;font-weight:400;color:var(--ink);line-height:1.25;margin-bottom:16px;">
+        Hi, ich bin Maria ! <br>ich mache Daten verständlich.
+      </h2>
       <p style="font-size:15px;line-height:1.75;color:var(--ink-light);max-width:560px;">
-        Ich bin angehende Data Analystin mit Fokus auf Datenanalyse, Reporting und
-        aussagekräftige Visualisierungen — mit dem Ziel, Unternehmen bei fundierten
-        Geschäftsentscheidungen zu unterstützen.
+        Als Data Analyst unterstütze ich Unternehmen dabei, ihre Daten zu verstehen 
+        und daraus klare Insights abzuleiten — für bessere Entscheidungen und optimierte Prozesse.
       </p>
     </section>
+
+
 
     <!-- KURZPROFIL -->
     <section class="section" id="profil">
@@ -559,11 +566,49 @@
         </div>
         <div class="profile-card">
           <strong>Unternehmen</strong>
-          Zusammenarbeit mit Henkel, Johnson & Johnson und L'Oréal in datenbasierten Implementierungsprojekten.
+          Erfahrung in der Zusammenarbeit mit internationalen Konsumgüterunternehmen im Rahmen datenbasierter Implementierungsprojekte.
         </div>
         <div class="profile-card">
           <strong>Weiterbildung</strong>
           Abgeschlossene Weiterbildung in Data Analytics mit Schwerpunkt Business Intelligence.
+        </div>
+      </div>
+    </section>
+
+</section>
+
+    <!-- SKILLS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <section class="section" id="skills">
+      <div class="section-label"><h2>Skills & Tools</h2></div>
+      <div class="skills-grid" style="grid-template-columns: repeat(4,1fr);">
+        <div class="skill-card" style="align-items:center;text-align:center;">
+          <svg viewBox="0 0 48 48" style="width:36px;height:36px;" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#169154" d="M29,6H15.744C14.781,6,14,6.781,14,7.744v7.259h15V6z"/>
+            <path fill="#18482a" d="M14,15.003h15V22h-15V15.003z"/>
+            <path fill="#169154" d="M14,22h15v7h-15V22z"/>
+            <path fill="#18482a" d="M14,29h15v7.256C29,37.219,28.219,38,27.256,38H14V29z"/>
+            <path fill="#29c27f" d="M42.256,6H29v9h13V7.744C42,6.781,41.219,6,42.256,6z"/>
+            <path fill="#27663f" d="M29,15.003h13V22H29V15.003z"/>
+            <path fill="#29c27f" d="M29,22h13v7H29V22z"/>
+            <path fill="#27663f" d="M29,29h13v7.256C42,37.219,41.219,38,42.256,38H29V29z"/>
+            <path fill="#ffffff" d="M9.807,14h-4.8L9,21.013L4.786,28h4.883l2.96-5.288L15.524,28h4.933l-4.258-7.06L20.581,14h-4.78l-2.741,5.088L9.807,14z"/>
+          </svg>
+          <div class="skill-name">Excel</div>
+        </div>
+        
+        <div class="skill-card" style="align-items:center;text-align:center;">
+          <i class="devicon-python-plain colored" style="font-size:36px;"></i>
+          <div class="skill-name">Python</div>
+        </div>
+        <div class="skill-card" style="align-items:center;text-align:center;">
+          <i class="devicon-postgresql-plain colored" style="font-size:36px;"></i>
+          <div class="skill-name">SQL</div>
+        </div>
+        
+        <div class="skill-card" style="align-items:center;text-align:center;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" style="width:36px;height:36px;object-fit:contain;" alt="Power BI"/>
+          <div class="skill-name">Power BI</div>
         </div>
       </div>
     </section>
@@ -573,22 +618,22 @@
       <div class="section-label"><h2>Analytischer Ansatz</h2></div>
       <div class="approach-grid">
         <div class="approach-card">
-          <div class="step-num">Schritt 01</div>
+          <div class="step-num"></div>
           <h3>Datenverständnis</h3>
           <p>Analyse der Datenstruktur sowie der zugrundeliegenden Fragestellung, um Kontext, Relevanz und mögliche Einschränkungen zu verstehen.</p>
         </div>
         <div class="approach-card">
-          <div class="step-num">Schritt 02</div>
+          <div class="step-num"></div>
           <h3>Datenaufbereitung</h3>
           <p>Bereinigung, Strukturierung und Validierung der Daten, um eine konsistente und zuverlässige Grundlage für die weitere Analyse zu schaffen.</p>
         </div>
         <div class="approach-card">
-          <div class="step-num">Schritt 03</div>
+          <div class="step-num"></div>
           <h3>Explorative Analyse</h3>
           <p>Identifikation von Mustern, Trends und Auffälligkeiten durch explorative Analyse und erste Visualisierungen.</p>
         </div>
         <div class="approach-card">
-          <div class="step-num">Schritt 04</div>
+          <div class="step-num"></div>
           <h3>Visualisierung & Interpretation</h3>
           <p>Darstellung der Ergebnisse durch klare Visualisierungen zur Unterstützung datenbasierter Entscheidungen.</p>
         </div>
@@ -605,19 +650,17 @@
           <p>Analyse von Gehaltsentwicklung, Erfahrungsstufen und Unternehmensmerkmalen im deutschen Arbeitsmarkt von 2020 bis 2025.</p>
         </div>
 
-        <div class="project-images">
-          <img src="DA_Executive_Overview.png" alt="Executive Overview Dashboard" />
-          <img src="Detailanalyse_-_Branche_und_Unternehmen.png" alt="Detailanalyse Branche und Unternehmen" />
-          <img src="Gehaltanalyse_nach_Rolle.png" alt="Gehaltsanalyse nach Rolle" />
+        <div class="project-images" style="grid-template-columns:1fr;">
+          <img src="DA_Executive_Overview.png" alt="Executive Overview Dashboard" style="width:100%;aspect-ratio:16/9;object-fit:cover;" />
         </div>
 
-        <div class="project-footer">
+        <div class="project-footer" style="align-items:flex-end;">
           <div class="project-insight">
             <strong>Erkenntnisse</strong>
             Senior-Gehälter steigen deutlich stärker als Entry-Level-Gehälter.
             Berufserfahrung hat einen stärkeren Einfluss auf das Gehalt als Branche oder Unternehmensgröße.
           </div>
-          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;justify-content:space-between;align-self:stretch;">
             <div class="tag-list" style="justify-content:flex-end;">
               <span class="tag">Power BI</span>
               <span class="tag">DAX</span>
@@ -655,43 +698,6 @@
         </div>
       </div>
       -->
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section" id="skills">
-      <div class="section-label"><h2>Skills & Tools</h2></div>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-name">Power BI</div>
-          <div class="skill-level">Fortgeschritten</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:88%"></div></div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-name">DAX & Power Query</div>
-          <div class="skill-level">Fortgeschritten</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:82%"></div></div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-name">SQL</div>
-          <div class="skill-level">Fortgeschritten</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:78%"></div></div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-name">Excel</div>
-          <div class="skill-level">Experte</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:93%"></div></div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-name">Python</div>
-          <div class="skill-level">Grundkenntnisse</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:48%"></div></div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-name">Datenvisualisierung</div>
-          <div class="skill-level">Fortgeschritten</div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div>
-        </div>
-      </div>
     </section>
 
     <!-- KONTAKT -->
