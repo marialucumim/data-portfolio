@@ -2,7 +2,7 @@
 
 Persönliches Portfolio als Data Analyst & Business Intelligence.
 
-🌐 [Portfolio ansehen](https://marialucumim.github.io/data-portfolio.github.io)
+🌐 [Portfolio ansehen](https://marialucumim.github.io/data-portfolio)
 
 ---
 
