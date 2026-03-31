@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobRadar Deutschland | Maria Lucumi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5068;
+      --ink-faint: #8b92a9;
+      --accent: #2a5fd4;
+      --accent-soft: #eef3fc;
+      --surface: #f7f8fb;
+      --white: #ffffff;
+      --border: #e4e7f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .topbar-title {
+      font-size: 13px;
+      color: var(--ink-faint);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-list-top { display: flex; gap: 8px; }
+
+    .tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 48px 52px;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+
+    .hero-meta-item { display: flex; flex-direction: column; gap: 3px; }
+
+    .hero-meta-item .meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .hero-meta-item .meta-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-light);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 48px 100px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .main-col { min-width: 0; }
+
+    /* ── BLOCKS ── */
+    .block {
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .block:nth-child(1) { animation-delay: 0.15s; }
+    .block:nth-child(2) { animation-delay: 0.25s; }
+    .block:nth-child(3) { animation-delay: 0.35s; }
+    .block:nth-child(4) { animation-delay: 0.45s; }
+
+    .block-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .block-label h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .block-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+    }
+
+    .block p:last-child { margin-bottom: 0; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-light);
+      margin-bottom: 0;
+    }
+
+    /* ── SCREENSHOT ── */
+    .screenshot-block {
+      margin-bottom: 32px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+
+    .screenshot-block:hover {
+      box-shadow: 0 8px 32px rgba(42,95,212,0.09);
+    }
+
+    .screenshot-block img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-caption {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .screenshot-caption strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .screenshot-caption span {
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    /* ── PIPELINE VISUAL ── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 24px 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pipe-step {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 130px;
+    }
+
+    .pipe-step .pipe-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .pipe-step .pipe-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .pipe-arrow {
+      color: var(--ink-faint);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── INSIGHTS ── */
+    .insight-cards { display: flex; flex-direction: column; gap: 14px; }
+
+    .insight-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 18px 22px;
+      transition: box-shadow 0.2s;
+    }
+
+    .insight-card:hover {
+      box-shadow: 0 4px 16px rgba(42,95,212,0.08);
+    }
+
+    .insight-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .insight-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .insight-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-light);
+      margin-bottom: 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar-col {
+      position: sticky;
+      top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.3s forwards;
+    }
+
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .sidebar-card h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+    }
+
+    .sidebar-tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .sidebar-tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-row .stat-label { color: var(--ink-faint); }
+    .stat-row .stat-value { color: var(--ink); font-weight: 600; }
+
+    .nav-links { display: flex; flex-direction: column; gap: 6px; }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+
+    .nav-links a::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .nav-links a:hover::before { background: var(--accent); }
+
+    .github-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--white);
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+
+    .github-btn:hover { background: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .content { grid-template-columns: 1fr; }
+      .sidebar-col { position: relative; top: auto; }
+      .hero { padding: 44px 28px 36px; }
+      .content { padding: 40px 28px 60px; }
+      .topbar { padding: 0 24px; }
+      .topbar-title { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; }
+      .hero-meta { gap: 20px; }
+      .tag-list-top { display: none; }
+      .pipeline { flex-direction: column; align-items: flex-start; }
+      .pipe-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Zurück zum Portfolio
+    </a>
+    <span class="topbar-title">Maria Lucumi · Projektdetail</span>
+    <div class="tag-list-top">
+      <span class="tag">Python</span>
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">Claude API</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="background:var(--white); border-bottom:1px solid var(--border);">
+    <div class="hero">
+      <div class="hero-label">Projekt · Data Engineering & Automatisierung</div>
+      <h1>JobRadar Deutschland — Automatisierte Jobsuche mit KI</h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="meta-label">Zeitraum</span>
+          <span class="meta-value">2026</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Datenquelle</span>
+          <span class="meta-value">Bundesagentur für Arbeit REST API</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Python, PostgreSQL, Claude API, Node.js</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="meta-label">Stellenangebote verarbeitet</span>
+          <span class="meta-value">1.118+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <main class="main-col">
+
+      <!-- ZIELSETZUNG -->
+      <div class="block" id="ziel">
+        <div class="block-label"><h2>Zielsetzung</h2></div>
+        <p>
+          JobRadar Deutschland ist ein eigenständig entwickeltes End-to-End-Datenprojekt zur
+          Automatisierung der Jobsuche im deutschen Arbeitsmarkt. Das System kombiniert
+          Datenextraktion über eine offizielle REST API, NLP-basiertes Relevanz-Scoring und
+          KI-gestützte Dokumentengenerierung zu einer vollständigen Pipeline.
+        </p>
+        <p>
+          Die zentrale Fragestellung: <strong>Wie lässt sich der Aufwand einer strukturierten
+          Jobsuche durch Datenpipelines und KI von mehreren Stunden auf wenige Minuten reduzieren
+          — ohne dabei Qualität und Ehrlichkeit der Bewerbungsunterlagen zu opfern?</strong>
+        </p>
+      </div>
+
+      <!-- METHODIK -->
+      <div class="block" id="methodik">
+        <div class="block-label"><h2>Architektur & Methodik</h2></div>
+        <p>Das System besteht aus drei aufeinander aufbauenden Modulen, die sequenziell ausgeführt werden:</p>
+
+        <div class="pipeline">
+          <div class="pipe-step">
+            <span class="pipe-label">Schritt 1</span>
+            <span class="pipe-name">scraper.py</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-step">
+            <span class="pipe-label">Schritt 2</span>
+            <span class="pipe-name">nlp_analysis.py</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-step">
+            <span class="pipe-label">Schritt 3</span>
+            <span class="pipe-name">cv_generator.py</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-step">
+            <span class="pipe-label">Output</span>
+            <span class="pipe-name">Word + Excel</span>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Datenextraktion — Bundesagentur für Arbeit API</h3>
+              <p>Verbindung zur offiziellen REST API über OAuth2-Authentifizierung. Suche nach
+              10 relevanten Suchbegriffen × 6 Städte in der Stuttgart-Region plus Remote-Stellen.
+              Automatische Deduplizierung über die Referenznummer und Speicherung in PostgreSQL.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>NLP-Relevanz-Scoring</h3>
+              <p>Gewichtetes Keyword-Matching gegen 30+ relevante Skills mit individuellen Punktgewichten.
+              Klassifizierung jeder Stelle in High / Medium / Low / Not relevant.
+              Bonus-Punkte für direkte Jobtitel-Keywords im Stellentitel.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>KI-gestützte Dokumentengenerierung — Claude API</h3>
+              <p>Liest Top-Stellenangebote aus der Datenbank und sendet Stellenbeschreibung
+              plus Lebenslauf-Basis an die Claude API. Generiert ein angepasstes Profil und
+              ein individuelles Anschreiben — mit strikten Regeln gegen Übertreibung und KI-Stil.
+              Zwei Checkpoint-Stufen ermöglichen manuelle Kontrolle vor der Word-Erstellung.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Bewerbungs-Tracking — Excel</h3>
+              <p>Manuelles Tracking aller gesendeten Bewerbungen mit Dropdown-Feldern für Status
+              und Portal. Automatische KPIs für Antwortquote, Tage ohne Antwort und Verteilung
+              nach Unternehmen — alles in einem integrierten Excel-Dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="block" id="output">
+        <div class="block-label"><h2>Output & Ergebnisse</h2></div>
+
+        <div style="margin-bottom:40px;">
+          <h3 style="font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:var(--ink);margin-bottom:14px;">Bewerbungs-Tracker Dashboard</h3>
+          <div class="screenshot-block" style="margin-bottom:16px;">
+            <img src="jobradar_preview.png" alt="JobRadar Bewerbungs-Tracker" />
+          </div>
+          <p style="font-size:14px;line-height:1.75;color:var(--ink-light);">
+            Der Bewerbungs-Tracker zeigt auf einen Blick den Status aller laufenden Bewerbungen —
+            mit KPIs für Antwortquote, Tage ohne Reaktion und Verteilung nach Portal und Status.
+            Die Tabelle enthält alle relevanten Informationen: Unternehmen, Stelle, Arbeitsmodell,
+            Skills und Kontaktperson.
+          </p>
+        </div>
+
+        <div style="margin-bottom:40px;">
+          <h3 style="font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:var(--ink);margin-bottom:14px;">Generierte Bewerbungsunterlagen</h3>
+          <div class="screenshot-block" style="margin-bottom:16px;">
+            <img src="arbeitsmappe.png" alt="Generierter Lebenslauf" />
+          </div>
+          <p style="font-size:14px;line-height:1.75;color:var(--ink-light);">
+            Pro Stelle generiert das System zwei Word-Dokumente: einen Lebenslauf mit angepasstem
+            Profil für die konkrete Stelle sowie ein Anschreiben im menschlichen Stil —
+            ohne KI-Floskeln, mit ehrlicher Darstellung der tatsächlichen Erfahrung.
+          </p>
+        </div>
+      </div>
+
+      <!-- ERKENNTNISSE -->
+      <div class="block" id="erkenntnisse">
+        <div class="block-label"><h2>Zentrale Erkenntnisse</h2></div>
+
+        <div class="insight-cards">
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 01</div>
+            <h3>API-Daten allein reichen nicht — NLP macht den Unterschied</h3>
+            <p>Von 1.118 extrahierten Stellenangeboten sind nur 54 (4,8%) wirklich relevant
+            für das Zielprofil. Ohne NLP-Scoring müssten alle manuell gesichtet werden.
+            Das Scoring reduziert den Prüfaufwand um über 95%.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 02</div>
+            <h3>KI-Generierung braucht strikte Grenzen</h3>
+            <p>Ohne klare Regeln im Prompt tendieren KI-Modelle dazu, Erfahrungen zu übertreiben
+            und generische Formulierungen zu verwenden. Die Lösung: explizite Verbotslisten,
+            Checkpoint-Reviews und ein CV-Basis-Dokument das als einzige Wahrheitsquelle dient.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">Erkenntnis 03</div>
+            <h3>Automatisierung ersetzt nicht das Urteilsvermögen</h3>
+            <p>Das System entscheidet nicht — es bereitet vor. Jede Bewerbung wird manuell
+            freigegeben, jedes Dokument vor dem Versand geprüft. Die Automatisierung spart Zeit
+            bei repetitiven Aufgaben und schafft Raum für die wichtigen Entscheidungen.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar-col">
+
+      <div class="sidebar-card">
+        <h4>Navigation</h4>
+        <nav class="nav-links">
+          <a href="#ziel">Zielsetzung</a>
+          <a href="#methodik">Architektur & Methodik</a>
+          <a href="#output">Output & Ergebnisse</a>
+          <a href="#erkenntnisse">Erkenntnisse</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Tools & Technologien</h4>
+        <div class="sidebar-tag-list">
+          <span class="sidebar-tag">Python</span>
+          <span class="sidebar-tag">PostgreSQL</span>
+          <span class="sidebar-tag">Claude API</span>
+          <span class="sidebar-tag">Node.js</span>
+          <span class="sidebar-tag">NLP</span>
+          <span class="sidebar-tag">REST API</span>
+          <span class="sidebar-tag">OAuth2</span>
+          <span class="sidebar-tag">Excel</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Kennzahlen</h4>
+        <div class="stat-row">
+          <span class="stat-label">Stellen extrahiert</span>
+          <span class="stat-value">1.118+</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">High Relevanz</span>
+          <span class="stat-value">54 (4,8%)</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Pipeline-Schritte</span>
+          <span class="stat-value">3 Skripte</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Output pro Stelle</span>
+          <span class="stat-value">2 Word-Docs</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Region</span>
+          <span class="stat-value">Stuttgart · DACH</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Quellcode</h4>
+        <p style="font-size:13px;line-height:1.6;color:var(--ink-light);margin-bottom:12px;">
+          Vollständiger Code auf GitHub verfügbar.
+        </p>
+        <a href="https://github.com/marialucumim/jobradar-deutschland"
+           target="_blank" class="github-btn">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub ansehen
+        </a>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Datenquelle</h4>
+        <p style="font-size:13px;line-height:1.6;color:var(--ink-light);">
+          Bundesagentur für Arbeit<br>
+          <span style="color:var(--ink-faint);font-size:12px;">REST API — Öffentlich verfügbar</span>
+        </p>
+      </div>
+
+    </aside>
+  </div>
+
+</body>
+</html>
